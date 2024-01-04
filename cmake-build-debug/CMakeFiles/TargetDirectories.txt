@@ -1,0 +1,3 @@
+C:/Users/seil0/CLionProjects/POS_SFML_Dama/cmake-build-debug/CMakeFiles/SFML.dir
+C:/Users/seil0/CLionProjects/POS_SFML_Dama/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/seil0/CLionProjects/POS_SFML_Dama/cmake-build-debug/CMakeFiles/rebuild_cache.dir
