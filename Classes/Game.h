@@ -11,9 +11,11 @@
 class Game {
 public:
     Game();
-    void move(Pawn move);
-    void capture(Pawn taker, Pawn captured);
+    void inicializeGame();
+    void move(Pawn moved, sf::Vector2f positionFrom, sf::Vector2f positionTo);
+    void capture(Pawn taker, Pawn captured, sf::Vector2f positionFrom, sf::Vector2f positionCaptured, sf::Vector2f positionTo);
 
+    bool validMove(const Pawn& moved, const sf::Vector2f& positionFrom, const sf::Vector2f& positionTo, int currentPlayerID) const;
 private:
     Board gameBoard;
     Player blue;

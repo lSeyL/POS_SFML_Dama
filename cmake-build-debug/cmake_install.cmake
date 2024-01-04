@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/seil0/CLionProjects/POS_SFML_Dama
+# Install script for directory: C:/Users/Richen/CLionProjects/POS_SFML_Dama
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/seil0/CLionProjects/POS_SFML_Dama/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/Richen/CLionProjects/POS_SFML_Dama/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -52,3 +52,16 @@ void Pawn::setSelected(bool select) {
         this->pawn.setOutlineThickness(0);
     }
 }
+
+void Pawn::promote() {
+    this->promoted = true;
+}
+
+void Pawn::setOwner(Player owningPlayer) {
+    this->owner = owningPlayer.getPlayerId();
+}
+
+int Pawn::getOwner() const {
+    return this->owner;
+}
+

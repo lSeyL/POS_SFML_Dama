@@ -11,7 +11,7 @@ bool Square::isBlack() {
     return this->black;
 }
 
-bool Square::isOccupied() {
+bool Square::isOccupied() const{
     return this->occupied;
 }
 

@@ -5,7 +5,7 @@
 #include <iostream>
 #ifndef POS_SFML_DAMA_PAWN_H
 #define POS_SFML_DAMA_PAWN_H
-
+#include "Player.h"
 
 class Pawn : public sf::Drawable {
 private:
@@ -14,6 +14,7 @@ private:
     bool promoted = false;
     sf::CircleShape pawn;
     sf::FloatRect hitbox;
+    int owner = 0;
 public:
     Pawn();
     bool isBlack();
@@ -26,6 +27,9 @@ public:
     void setPosition(sf::Vector2f position);
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     void updateHitbox();
+    void promote();
+    void setOwner(Player owningPlayer) ;
+    int getOwner() const ;
 };
 
 

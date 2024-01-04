@@ -14,7 +14,7 @@ private:
 public:
     Square();
     bool isBlack();
-    bool isOccupied();
+    bool isOccupied() const;
     void setBlack();
     void changeSize(sf::Vector2f vector2F);
     void changeColor(sf::Color color);

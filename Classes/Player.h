@@ -13,12 +13,12 @@ private:
     int playerId;
     Board gameBoard;
     std::vector<Pawn> pieces;
-    bool notValidMove;
 public:
-    Player();
-    void setBoard(Board gameBoard);
-    void getPieces(std::vector<Pawn> pieces);
-
+    Player(int id);
+    void setBoard(Board board);
+    void setPieces(std::vector<Pawn> playerPieces);
+    int getPlayerId();
+    void setPlayerId(int id);
 };
 
 
