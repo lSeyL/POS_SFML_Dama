@@ -58,6 +58,12 @@ void Game::initializeGame() {
 
 void Game::move(Pawn& moved, const sf::Vector2f& positionFrom, const sf::Vector2f& positionTo, int currentPlayerID) {
     if (validMove(moved, positionFrom, positionTo, currentPlayerID)) {
+
+        if (moved.getOwner() != currentPlayerID) {
+            std::cerr << "Error: Attempting to move opponent's pawn." << std::endl;
+            return;  // Exit the function if the pawn doesn't belong to the current player
+        }
+
         // Update the game board based on the move
         // For simplicity, we assume that the board has a function updateSquare to update the state of a square
         gameBoard.updateSquare(positionFrom.x, positionFrom.y, Square()); // Clear the starting position
@@ -79,6 +85,9 @@ void Game::move(Pawn& moved, const sf::Vector2f& positionFrom, const sf::Vector2
             // Implement logic to handle multiple jumps
             // This could involve allowing the player to choose the next jump or automatically performing it
             // You might need additional game state tracking for this
+        }
+        if (jumpTargets.empty()) {
+            switchTurn();
         }
     }
 }
@@ -141,6 +150,16 @@ void Game::findJumpTargets(const sf::Vector2f& currentPosition, std::vector<sf::
     }
 }
 
+void Game::switchTurn() {
+    // Switch turns between player 1 (blue) and player 2 (red)
+    currentPlayerID = (currentPlayerID == 1) ? 2 : 1;
+}
+
+bool Game::isValidPosition(const sf::Vector2f& position) const {
+    return position.x >= 0 && position.x < gameBoard.getBoardSize() &&
+           position.y >= 0 && position.y < gameBoard.getBoardSize();
+}
+
 bool Game::validMove(const Pawn& moved, const sf::Vector2f& positionFrom, const sf::Vector2f& positionTo, int currentPlayerID) const{
 
     if (positionTo.x < 0 || positionTo.x >= gameBoard.getBoardSize() || positionTo.y < 0 || positionTo.y >= gameBoard.getBoardSize()) {
@@ -155,7 +174,7 @@ bool Game::validMove(const Pawn& moved, const sf::Vector2f& positionFrom, const 
     if (deltaX != deltaY) {
         return false;
     }
-    if (deltaX == 1 || !moved.getPromotionStatus()) {
+    if (deltaX == 1 && !moved.getPromotionStatus()) {
         // check ktorým smerom sa majú pohybovať
         int direction = 0;
         if (currentPlayerID == 1)

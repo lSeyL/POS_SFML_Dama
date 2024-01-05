@@ -18,12 +18,15 @@ public:
     void handlePromotion(Pawn &moved, float positionToY);
     bool isValidJumpTarget(const sf::Vector2f &currentPosition, float targetX, float targetY, int currentPlayerID) const;
     void findJumpTargets(const sf::Vector2f &currentPosition, std::vector<sf::Vector2f> &jumpTargets, int currentPlayerID) const;
-
+    int currentPlayerID;
+    void switchTurn();
 private:
     Board gameBoard;
     Player blue;
     Player red;
 
+
+    bool isValidPosition(const sf::Vector2f &position) const;
 };
 
 
