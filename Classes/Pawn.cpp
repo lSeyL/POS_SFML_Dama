@@ -59,7 +59,7 @@ void Pawn::setSelected(bool select) {
     }
 }
 
-sf::Vector2f Pawn::getPosition() {
+sf::Vector2f Pawn::getPosition() const {
     return this->pawn.getPosition();
 }
 
@@ -77,4 +77,16 @@ int Pawn::getY() const {
 
 void Pawn::setY(int setPosY) {
     posY = setPosY;
+}
+
+void Pawn::promote() {
+    this->promoted = true;
+}
+
+void Pawn::setOwner(int owner) {
+    this->owner = owner;
+}
+
+int Pawn::getOwner() {
+    return this->owner.getPlayerId();
 }

@@ -2,6 +2,7 @@
 // Created by seil0 on 4. 1. 2024.
 //
 #include <SFML/Graphics.hpp>
+#include "Pawn.h"
 
 #ifndef POS_SFML_DAMA_SQUARE_H
 #define POS_SFML_DAMA_SQUARE_H
@@ -11,6 +12,7 @@ class Square : public sf::Drawable {
 private:
     bool black = false;
     bool occupied;
+    Pawn pawn;
     sf::RectangleShape square;
     sf::FloatRect hitbox;
     int posX;
@@ -21,6 +23,7 @@ public:
     bool isBlack() const;
 
     bool isOccupied() const;
+    Pawn getPawn();
 
     void setOccupied(bool setOccupied);
 

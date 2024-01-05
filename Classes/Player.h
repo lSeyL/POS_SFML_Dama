@@ -18,7 +18,7 @@ public:
     Player();
     void setBoard(Board gameBoard);
     void getPieces(std::vector<Pawn> pieces);
-
+    int getPlayerID();
 };
 
 

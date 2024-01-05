@@ -4,3 +4,6 @@
 
 #include "Player.h"
 
+int Player::getPlayerID() {
+    return this->playerId;
+}

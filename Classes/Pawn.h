@@ -3,9 +3,12 @@
 //
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Player.h"
 
 #ifndef POS_SFML_DAMA_PAWN_H
 #define POS_SFML_DAMA_PAWN_H
+
+
 
 
 class Pawn : public sf::Drawable {
@@ -13,6 +16,7 @@ private:
     bool black = false;
     bool selected = false;
     bool promoted = false;
+    Player owner;
     sf::CircleShape pawn;
     sf::FloatRect hitbox;
     int posX;
@@ -38,7 +42,7 @@ public:
 
     void setPosition(sf::Vector2f position);
 
-    sf::Vector2f getPosition();
+    sf::Vector2f getPosition() const;
 
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
@@ -50,7 +54,11 @@ public:
 
     void setY(int setPosY);
 
-};
+    void promote();
 
+    void setOwner(Player owner);
+
+    int getOwner();
+};
 
 #endif //POS_SFML_DAMA_PAWN_H

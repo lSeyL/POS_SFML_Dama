@@ -11,13 +11,19 @@
 class Game {
 public:
     Game();
-    void move(Pawn move);
-    void capture(Pawn taker, Pawn captured);
+    void inicializeGame();
+    void move(Pawn &moved, const sf::Vector2f &positionFrom, const sf::Vector2f &positionTo, int currentPlayerID);
+    bool validMove(const Pawn& moved, const sf::Vector2f& positionFrom, const sf::Vector2f& positionTo, int currentPlayerID) const;
+    void handleCapture(const sf::Vector2f &positionFrom, const sf::Vector2f &positionTo);
+    void handlePromotion(Pawn &moved, float positionToY);
+    bool isValidJumpTarget(const sf::Vector2f &currentPosition, float targetX, float targetY, int currentPlayerID) const;
+    void findJumpTargets(const sf::Vector2f &currentPosition, std::vector<sf::Vector2f> &jumpTargets, int currentPlayerID) const;
 
 private:
     Board gameBoard;
     Player blue;
     Player red;
+
 };
 
 
