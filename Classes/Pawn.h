@@ -56,6 +56,8 @@ public:
 
     void promote();
 
+    bool getPromotionStatus() const;
+
     void setOwner(Player owner);
 
     int getOwner();

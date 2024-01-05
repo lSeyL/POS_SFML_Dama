@@ -11,7 +11,7 @@
 class Game {
 public:
     Game();
-    void inicializeGame();
+    void initializeGame();
     void move(Pawn &moved, const sf::Vector2f &positionFrom, const sf::Vector2f &positionTo, int currentPlayerID);
     bool validMove(const Pawn& moved, const sf::Vector2f& positionFrom, const sf::Vector2f& positionTo, int currentPlayerID) const;
     void handleCapture(const sf::Vector2f &positionFrom, const sf::Vector2f &positionTo);

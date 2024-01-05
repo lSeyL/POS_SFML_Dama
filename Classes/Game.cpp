@@ -4,8 +4,56 @@
 
 #include "Game.h"
 
-void Game::inicializeGame() {
+void Game::initializeGame() {
+    for (int i = 0; i < gameBoard.getBoardSize(); ++i) {
+        for (int j = 0; j < gameBoard.getBoardSize(); ++j) {
+            gameBoard.getSquare(i, j).changeSize(sf::Vector2f(100, 100));
 
+            // Set the color based on the position to create a checker pattern
+            if ((i + j) % 2 == 0) {
+                gameBoard.getSquare(i, j).changeColor(sf::Color::White);
+                gameBoard.getSquare(i, j).updateHitbox();
+            } else {
+                gameBoard.getSquare(i, j).changeColor(sf::Color::Black);
+                gameBoard.getSquare(i, j).setBlack();
+                gameBoard.getSquare(i, j).updateHitbox();
+            }
+
+            gameBoard.getSquare(i, j).setPosition(sf::Vector2f(j * 100, i * 100));
+            gameBoard.getSquare(i, j).setX(j);
+            gameBoard.getSquare(i, j).setY(i);
+
+            // Place initial pawns for player 1 (blue)
+            if (gameBoard.getSquare(i, j).isBlack() && i < 3) {
+                gameBoard.getSquare(i, j).setOccupied(true);
+                Pawn pawn;
+                pawn.changeSize(50);
+                pawn.changeColor(sf::Color::Blue);
+                pawn.setPosition(sf::Vector2f(j * 100, i * 100));
+                pawn.updateHitbox();
+                pawn.setX(j);
+                pawn.setY(i);
+                pawn.setOwner(1);
+
+                blue.getPieces().push_back(pawn);
+            }
+
+                // Place initial pawns for player 2 (red)
+            else if (gameBoard.getSquare(i, j).isBlack() && i >= gameBoard.getBoardSize() - 3) {
+                gameBoard.getSquare(i, j).setOccupied(true);
+                Pawn pawn;
+                pawn.changeSize(50);
+                pawn.changeColor(sf::Color::Red);
+                pawn.setPosition(sf::Vector2f(j * 100, i * 100));
+                pawn.updateHitbox();
+                pawn.setX(j);
+                pawn.setY(i);
+                pawn.setOwner(2);
+
+                red.getPieces().push_back(pawn);
+            }
+        }
+    }
 }
 
 void Game::move(Pawn& moved, const sf::Vector2f& positionFrom, const sf::Vector2f& positionTo, int currentPlayerID) {
@@ -107,7 +155,7 @@ bool Game::validMove(const Pawn& moved, const sf::Vector2f& positionFrom, const 
     if (deltaX != deltaY) {
         return false;
     }
-    if (deltaX == 1) {
+    if (deltaX == 1 || !moved.getPromotionStatus()) {
         // check ktorým smerom sa majú pohybovať
         int direction = 0;
         if (currentPlayerID == 1)

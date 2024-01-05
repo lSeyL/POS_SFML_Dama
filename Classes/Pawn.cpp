@@ -90,3 +90,7 @@ void Pawn::setOwner(int owner) {
 int Pawn::getOwner() {
     return this->owner.getPlayerId();
 }
+
+bool Pawn::getPromotionStatus() const {
+    return this->promoted;
+}
