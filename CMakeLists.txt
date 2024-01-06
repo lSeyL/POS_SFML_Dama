@@ -13,7 +13,9 @@ add_executable(SFML main.cpp
         Classes/Game.cpp
         Classes/Game.h
         Classes/Pawn.cpp
-        Classes/Pawn.h)
+        Classes/Pawn.h
+        Classes/DraggedPawn.cpp
+        Classes/DraggedPawn.h)
 
 set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR C:/SFML/lib/cmake/SFML)

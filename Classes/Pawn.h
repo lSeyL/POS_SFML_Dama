@@ -3,20 +3,16 @@
 //
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "Player.h"
 
 #ifndef POS_SFML_DAMA_PAWN_H
 #define POS_SFML_DAMA_PAWN_H
 
-
-
-
 class Pawn : public sf::Drawable {
 private:
+    bool owner;
     bool black = false;
     bool selected = false;
     bool promoted = false;
-    Player owner;
     sf::CircleShape pawn;
     sf::FloatRect hitbox;
     int posX;
@@ -58,9 +54,11 @@ public:
 
     bool getPromotionStatus() const;
 
-    void setOwner(Player owner);
+    bool getOwner();
 
-    int getOwner();
+    void setOwner(bool setOwner);
+
+    sf::CircleShape getMainShape();
 };
 
 #endif //POS_SFML_DAMA_PAWN_H

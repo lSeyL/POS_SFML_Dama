@@ -4,8 +4,9 @@
 
 #ifndef POS_SFML_DAMA_PLAYER_H
 #define POS_SFML_DAMA_PLAYER_H
+
 #include "Pawn.h"
-#include "vector"
+//#include "vector"
 #include "Board.h"
 
 class Player {
@@ -16,8 +17,11 @@ private:
     bool notValidMove;
 public:
     Player();
+
     void setBoard(Board gameBoard);
+
     void getPieces(std::vector<Pawn> pieces);
+
     int getPlayerID();
 };
 

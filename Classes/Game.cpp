@@ -3,60 +3,16 @@
 //
 
 #include "Game.h"
+/*
+Game::Game() {
 
-void Game::initializeGame() {
-    for (int i = 0; i < gameBoard.getBoardSize(); ++i) {
-        for (int j = 0; j < gameBoard.getBoardSize(); ++j) {
-            gameBoard.getSquare(i, j).changeSize(sf::Vector2f(100, 100));
-
-            // Set the color based on the position to create a checker pattern
-            if ((i + j) % 2 == 0) {
-                gameBoard.getSquare(i, j).changeColor(sf::Color::White);
-                gameBoard.getSquare(i, j).updateHitbox();
-            } else {
-                gameBoard.getSquare(i, j).changeColor(sf::Color::Black);
-                gameBoard.getSquare(i, j).setBlack();
-                gameBoard.getSquare(i, j).updateHitbox();
-            }
-
-            gameBoard.getSquare(i, j).setPosition(sf::Vector2f(j * 100, i * 100));
-            gameBoard.getSquare(i, j).setX(j);
-            gameBoard.getSquare(i, j).setY(i);
-
-            // Place initial pawns for player 1 (blue)
-            if (gameBoard.getSquare(i, j).isBlack() && i < 3) {
-                gameBoard.getSquare(i, j).setOccupied(true);
-                Pawn pawn;
-                pawn.changeSize(50);
-                pawn.changeColor(sf::Color::Blue);
-                pawn.setPosition(sf::Vector2f(j * 100, i * 100));
-                pawn.updateHitbox();
-                pawn.setX(j);
-                pawn.setY(i);
-                pawn.setOwner(1);
-
-                blue.getPieces().push_back(pawn);
-            }
-
-                // Place initial pawns for player 2 (red)
-            else if (gameBoard.getSquare(i, j).isBlack() && i >= gameBoard.getBoardSize() - 3) {
-                gameBoard.getSquare(i, j).setOccupied(true);
-                Pawn pawn;
-                pawn.changeSize(50);
-                pawn.changeColor(sf::Color::Red);
-                pawn.setPosition(sf::Vector2f(j * 100, i * 100));
-                pawn.updateHitbox();
-                pawn.setX(j);
-                pawn.setY(i);
-                pawn.setOwner(2);
-
-                red.getPieces().push_back(pawn);
-            }
-        }
-    }
 }
 
-void Game::move(Pawn& moved, const sf::Vector2f& positionFrom, const sf::Vector2f& positionTo, int currentPlayerID) {
+void Game::initializeGame() {
+    gameBoard.;
+}
+
+void Game::move(Pawn &moved, const sf::Vector2f &positionFrom, const sf::Vector2f &positionTo, int currentPlayerID) {
     if (validMove(moved, positionFrom, positionTo, currentPlayerID)) {
 
         if (moved.getOwner() != currentPlayerID) {
@@ -92,7 +48,7 @@ void Game::move(Pawn& moved, const sf::Vector2f& positionFrom, const sf::Vector2
     }
 }
 
-void Game::handleCapture(const sf::Vector2f& positionFrom, const sf::Vector2f& positionTo) {
+void Game::handleCapture(const sf::Vector2f &positionFrom, const sf::Vector2f &positionTo) {
     // Simplified logic: Check if there is an opponent's piece at the jumped position
     float jumpedX = (positionFrom.x + positionTo.x) / 2.0f;
     float jumpedY = (positionFrom.y + positionTo.y) / 2.0f;
@@ -103,14 +59,15 @@ void Game::handleCapture(const sf::Vector2f& positionFrom, const sf::Vector2f& p
     }
 }
 
-void Game::handlePromotion(Pawn& moved, float positionToY) {
+void Game::handlePromotion(Pawn &moved, float positionToY) {
     // Simplified logic: Promote if the pawn reaches the last row
     if ((moved.getOwner() == 1 && positionToY == 7) || (moved.getOwner() == 2 && positionToY == 0)) {
         moved.promote();
     }
 }
 
-bool Game::isValidJumpTarget(const sf::Vector2f& currentPosition, float targetX, float targetY, int currentPlayerID) const {
+bool
+Game::isValidJumpTarget(const sf::Vector2f &currentPosition, float targetX, float targetY, int currentPlayerID) const {
     // Check if the target position is within bounds
     if (targetX >= 0 && targetX < gameBoard.getBoardSize() && targetY >= 0 && targetY < gameBoard.getBoardSize()) {
         // Check if the target square is occupied by an opponent's piece
@@ -122,7 +79,8 @@ bool Game::isValidJumpTarget(const sf::Vector2f& currentPosition, float targetX,
     return false;
 }
 
-void Game::findJumpTargets(const sf::Vector2f& currentPosition, std::vector<sf::Vector2f>& jumpTargets, int currentPlayerID) const {
+void Game::findJumpTargets(const sf::Vector2f &currentPosition, std::vector<sf::Vector2f> &jumpTargets,
+                           int currentPlayerID) const {
 
     // Check the upper-left position
     float targetX = currentPosition.x - 2.0f;
@@ -155,17 +113,19 @@ void Game::switchTurn() {
     currentPlayerID = (currentPlayerID == 1) ? 2 : 1;
 }
 
-bool Game::isValidPosition(const sf::Vector2f& position) const {
+bool Game::isValidPosition(const sf::Vector2f &position) const {
     return position.x >= 0 && position.x < gameBoard.getBoardSize() &&
            position.y >= 0 && position.y < gameBoard.getBoardSize();
 }
 
-bool Game::validMove(const Pawn& moved, const sf::Vector2f& positionFrom, const sf::Vector2f& positionTo, int currentPlayerID) const{
+bool Game::validMove(const Pawn &moved, const sf::Vector2f &positionFrom, const sf::Vector2f &positionTo,
+                     int currentPlayerID) const {
 
-    if (positionTo.x < 0 || positionTo.x >= gameBoard.getBoardSize() || positionTo.y < 0 || positionTo.y >= gameBoard.getBoardSize()) {
+    if (positionTo.x < 0 || positionTo.x >= gameBoard.getBoardSize() || positionTo.y < 0 ||
+        positionTo.y >= gameBoard.getBoardSize()) {
         return false;
     }
-    if ( gameBoard.getSquare(positionTo.x, positionTo.y).isOccupied()) {
+    if (gameBoard.getSquare(positionTo.x, positionTo.y).isOccupied()) {
         return false;
     }
     float deltaX = std::abs(positionTo.x - positionFrom.x);
@@ -177,12 +137,9 @@ bool Game::validMove(const Pawn& moved, const sf::Vector2f& positionFrom, const 
     if (deltaX == 1 && !moved.getPromotionStatus()) {
         // check ktorým smerom sa majú pohybovať
         int direction = 0;
-        if (currentPlayerID == 1)
-        {
+        if (currentPlayerID == 1) {
             direction = 1;
-        }
-        else
-        {
+        } else {
             direction = -1;
         }
 
@@ -206,4 +163,5 @@ bool Game::validMove(const Pawn& moved, const sf::Vector2f& positionFrom, const 
     return true;
 }
 
+*/
 

@@ -254,14 +254,8 @@ Ogg_LIB:FILEPATH=C:/SFML/lib/libogg.a
 //Path to a library.
 OpenAL_LIB:FILEPATH=C:/SFML/lib/libopenal32.a
 
-//Path to a library.
-OpenGL_LIB:FILEPATH=OpenGL_LIB-NOTFOUND
-
 //Value Computed by CMake
 POS_SFML_Dama_BINARY_DIR:STATIC=C:/Users/seil0/CLionProjects/POS_SFML_Dama/cmake-build-debug
-
-//The directory containing a CMake configuration file for POS_SFML_Dama.
-POS_SFML_Dama_DIR:PATH=POS_SFML_Dama_DIR-NOTFOUND
 
 //Value Computed by CMake
 POS_SFML_Dama_IS_TOP_LEVEL:STATIC=ON
@@ -269,17 +263,8 @@ POS_SFML_Dama_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 POS_SFML_Dama_SOURCE_DIR:STATIC=C:/Users/seil0/CLionProjects/POS_SFML_Dama
 
-//Value Computed by CMake
-SFML_BINARY_DIR:STATIC=C:/Users/seil0/CLionProjects/POS_SFML_Dama/cmake-build-debug
-
 //Path to a file.
 SFML_DOC_DIR:PATH=SFML_DOC_DIR-NOTFOUND
-
-//Value Computed by CMake
-SFML_IS_TOP_LEVEL:STATIC=ON
-
-//Value Computed by CMake
-SFML_SOURCE_DIR:STATIC=C:/Users/seil0/CLionProjects/POS_SFML_Dama
 
 //Path to a library.
 VorbisEnc_LIB:FILEPATH=C:/SFML/lib/libvorbisenc.a
@@ -457,8 +442,6 @@ FreeType_LIB-ADVANCED:INTERNAL=1
 Ogg_LIB-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OpenAL_LIB
 OpenAL_LIB-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: OpenGL_LIB
-OpenGL_LIB-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: VorbisEnc_LIB
 VorbisEnc_LIB-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: VorbisFile_LIB

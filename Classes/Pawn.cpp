@@ -32,7 +32,6 @@ void Pawn::setPosition(sf::Vector2f position) {
     this->pawn.setPosition(position);
 }
 
-
 void Pawn::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(pawn, states);
 }
@@ -83,14 +82,18 @@ void Pawn::promote() {
     this->promoted = true;
 }
 
-void Pawn::setOwner(int owner) {
-    this->owner = owner;
-}
-
-int Pawn::getOwner() {
-    return this->owner.getPlayerId();
-}
-
 bool Pawn::getPromotionStatus() const {
     return this->promoted;
+}
+
+void Pawn::setOwner(bool setOwner) {
+    this->owner = setOwner;
+}
+
+bool Pawn::getOwner() {
+    return this->owner;
+}
+
+sf::CircleShape Pawn::getMainShape() {
+    return this->pawn;
 }

@@ -7,3 +7,7 @@
 int Player::getPlayerID() {
     return this->playerId;
 }
+
+Player::Player() {
+
+}

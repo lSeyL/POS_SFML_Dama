@@ -1,9 +1,13 @@
 #include <iostream>
+#include <chrono>
+#include <ctime>
+
 #include <SFML/Graphics.hpp>
 #include "Classes/Square.h"
 #include "Classes/Board.h"
+#include "Classes/DraggedPawn.h"
 
-void attemptMove(Board &board, Pawn &pawn, const sf::Vector2f &destination) {
+void move(Board &board, Pawn &pawn, const sf::Vector2f &destination) {
     int destRow = static_cast<int>(destination.y / 100);
     int destCol = static_cast<int>(destination.x / 100);
     if (board.getSquare(destRow, destCol).isBlack()) {
@@ -43,7 +47,7 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(800, 800), "SFML");
     bool isFirstClick = true;
     Board board;
-
+    DraggedPawn dp;
     while (window.isOpen()) {
         sf::Event event;
 
@@ -55,61 +59,84 @@ int main() {
                     sf::Vector2f mousePosition = window.mapPixelToCoords(
                             sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
 
-                    for (auto &pawn: board.getPawnBlack()) {
+                    for (auto &pawn: board.getPawnWhite()) {
                         pawn.setSelected(false);
-                        pawn.changeColor(sf::Color::Red);
+                        pawn.changeColor(sf::Color::Blue);
+                        pawn.getMainShape().setOutlineThickness(0.f);
                     }
 
-                    for (auto &pawn: board.getPawnBlack()) {
+                    for (auto &pawn: board.getPawnWhite()) {
                         if (pawn.isHit(mousePosition)) {
                             if (isFirstClick) {
                                 pawn.setSelected(true);
-                                pawn.changeColor(sf::Color::Magenta);
+                                pawn.changeColor(sf::Color::Transparent);
+                                pawn.getMainShape().setOutlineColor(sf::Color::Magenta);
+                                pawn.getMainShape().setOutlineThickness(3.f);
                                 isFirstClick = false;
+                                dp.setDragged(true);
                                 break;
                             }
 
                         }
                     }
 
-
                 }
+
             } else if (event.type == sf::Event::MouseButtonReleased) {
                 if (event.mouseButton.button == sf::Mouse::Left) {
-                    for (auto &pawn: board.getPawnBlack()) {
+                    dp.setDragged(false);
+                    for (auto &pawn: board.getPawnWhite()) {
                         if (pawn.isSelected()) {
                             if (!isFirstClick) {
                                 pawn.setSelected(false);
                                 sf::Vector2f mousePositionNew = window.mapPixelToCoords(
                                         sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
-                                attemptMove(board, pawn, mousePositionNew);
+                                move(board, pawn, mousePositionNew);
                                 isFirstClick = true;
+                                pawn.changeColor(sf::Color::Blue);
+                                dp.setDragged(false);
+
                                 break;
                             }
 
                         }
                     }
+
+                }
+
+            }
+
+            /*
+            auto currentTime = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+            char timeString[100];
+            std::strftime(timeString, sizeof(timeString), "%Y-%m-%d %H:%M:%S", std::localtime(&currentTime));
+            std::cout << "test " << timeString << std::endl;
+            */
+            window.clear();
+
+            for (int i = 0; i < board.getBoardSize(); ++i) {
+                for (int j = 0; j < board.getBoardSize(); ++j) {
+                    window.draw(board.getSquare(i, j));
                 }
             }
-        }
 
-        window.clear();
-        for (int i = 0; i < board.getBoardSize(); ++i) {
-            for (int j = 0; j < board.getBoardSize(); ++j) {
-                window.draw(board.getSquare(i, j));
+            for (auto &pawn: board.getPawnBlack()) {
+                window.draw(pawn);
             }
+            for (auto &pawn: board.getPawnWhite()) {
+                window.draw(pawn);
+            }
+
+            dp.updatePosition(window);
+            window.draw(dp);
+
+
+            window.display();
+
         }
 
-        for (auto &pawn: board.getPawnBlack()) {
-            window.draw(pawn);
-        }
-        for (auto &pawn: board.getPawnWhite()) {
-            window.draw(pawn);
-        }
-        window.display();
 
     }
-
     return 0;
 }
 
